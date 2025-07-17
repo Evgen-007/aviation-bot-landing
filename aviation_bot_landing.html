@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeroBot — Telegram помощник для пилотов</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #003366;
+      color: white;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 10px;
+    }
+    section {
+      padding: 30px 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+    h2 {
+      color: #003366;
+      margin-top: 40px;
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    ul li::before {
+      content: '✅';
+      margin-right: 10px;
+      color: green;
+    }
+    .footer {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+    }
+    .highlight {
+      background: #e6f2ff;
+      border-left: 4px solid #3399ff;
+      padding: 10px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>✈️ AeroBot</h1>
+    <p>Телеграм-бот для пилотов: получай METAR, TAF, SIGMET, GAMET и отчёт в Word</p>
+  </header>
+
+  <section>
+    <h2>🧠 Назначение</h2>
+    <p>Telegram-бот помогает пилотам и авиа-энтузиастам получать метеоинформацию по маршрутам: METAR, TAF, SIGMET, GAMET, с генерацией .docx отчёта и сохранением истории.</p>
+
+    <h2>🛠 Возможности</h2>
+    <ul>
+      <li>Выбор маршрута: города или ICAO (например, Москва → Сочи)</li>
+      <li>Определение ICAO-кодов и построение маршрута</li>
+      <li>Выбор высоты (100 м — 7000 м)</li>
+      <li>Настраиваемые типы погодных данных: METAR, TAF, SIGMET, GAMET</li>
+      <li>Переключение языка 🇷🇺/🇬🇧</li>
+      <li>Формирование отчёта .docx с прикреплением в чат</li>
+      <li>Сохранение истории маршрутов и повторная генерация отчёта</li>
+      <li>Интеграция с OGIMET, NOAA, aviationweather.gov</li>
+    </ul>
+
+    <h2>💬 Интерфейс в Telegram</h2>
+    <div class="highlight">
+      <p>1. Приветствие → 2. Ввод маршрута → 3. Выбор высоты →<br>4. Настройка данных → 5. Кнопка «Сформировать отчёт» → 6. Получение файла</p>
+    </div>
+
+    <h2>📦 Где работает</h2>
+    <ul>
+      <li>VPS (Selectel, Oracle, Hetzner и т.д.)</li>
+      <li>Локальный запуск на Python</li>
+      <li>Docker-контейнер</li>
+    </ul>
+
+    <h2>🧩 Дополнительно возможно</h2>
+    <ul>
+      <li>Интерактивная карта маршрута через Telegram WebApp</li>
+      <li>Отчёт в PDF</li>
+      <li>PRO-подписка (опционально)</li>
+      <li>Подключение PostgreSQL</li>
+    </ul>
+  </section>
+
+  <div class="footer">
+    © 2025 AeroBot — Telegram-помощник для пилотов | Разработано с любовью к авиации 🛩
+  </div>
+</body>
+</html>
