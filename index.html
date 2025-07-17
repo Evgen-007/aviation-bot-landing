@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -12,50 +13,52 @@
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-image: url('background.png');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
       margin: 0;
       padding: 0;
-      text-align: center;
+      background: url('background.png') no-repeat center center fixed;
+      background-size: cover;
+      font-family: Arial, sans-serif;
       color: white;
-    }
-    .overlay {
-      background: rgba(0, 0, 0, 0.45);
-      width: 100%;
       height: 100vh;
-      padding-top: 80px;
-      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
     }
+
     h1 {
-      font-size: 2.5rem;
-      margin-bottom: 10px;
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     }
+
     p {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      margin: 0.5rem 0 2rem 0;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
     }
+
     a.button {
       display: inline-block;
-      margin-top: 20px;
       padding: 14px 28px;
       background: #0088cc;
       color: white;
       border-radius: 8px;
       text-decoration: none;
       font-size: 1.2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      transition: background 0.3s ease;
     }
+
     a.button:hover {
       background: #0070aa;
     }
   </style>
 </head>
 <body>
-  <div class="overlay">
-    <h1>🛫 Telegram-бот для пилотов</h1>
-    <p>Получай METAR, TAF, SIGMET, GAMET и отчёт по маршруту — прямо в Telegram</p>
-    <a class="button" href="https://t.me/pilot_weather_bot" target="_blank">Открыть бота в Telegram</a>
-  </div>
+  <h1>🛫 Telegram-бот для пилотов</h1>
+  <p>METAR, TAF, SIGMET, GAMET и отчёты — прямо в Telegram</p>
+  <a class="button" href="https://t.me/pilot_weather_bot" target="_blank">Открыть бота в Telegram</a>
 </body>
 </html>
