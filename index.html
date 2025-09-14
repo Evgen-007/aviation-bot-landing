@@ -1,15 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AeroBot — бот для пилотов</title>
-
-  <meta name="description" content="AeroBot — Телеграм-бот для пилотов. Получай METAR, TAF, SIGMET, GAMET по маршруту, отчёт в Word, история маршрутов." />
-  <meta name="keywords" content="AeroBot, авиация, телеграм бот, METAR, TAF, SIGMET, GAMET, отчёт, пилоты" />
-  <link rel="icon" href="https://telegram.org/favicon.ico" />
-
+  <title>Метеоформа</title>
   <style>
     body {
       margin: 0;
@@ -18,45 +12,137 @@
       background-size: cover;
       font-family: 'Segoe UI', sans-serif;
       color: white;
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
     }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 0.5rem;
-      text-shadow: 0 3px 6px rgba(0, 0, 0, 0.6);
-    }
-
-    p {
-      font-size: 1.3rem;
-      margin-bottom: 2rem;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-
-    a.button {
-      padding: 14px 28px;
-      background: #0088cc;
-      color: white;
+    .container {
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
       border-radius: 8px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
-      transition: background 0.3s ease;
+      max-width: 800px;
+      margin: 20px auto;
     }
-
-    a.button:hover {
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    fieldset {
+      border: 1px solid #ccc;
+      margin-top: 15px;
+      padding: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0088cc;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
       background: #0070aa;
+    }
+    #output {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 20px auto;
+      white-space: pre-wrap;
     }
   </style>
 </head>
 <body>
-  <h1>🛫 AeroBot</h1>
-  <p>Получай METAR, TAF, SIGMET, GAMET и отчёт по маршруту — прямо в Telegram</p>
-  <a class="button" href="https://t.me/pilot_weather_bot" target="_blank">Открыть бота в Telegram</a>
+  <div class="container">
+    <h1>Форма прогноза</h1>
+    <form id="weatherForm">
+      <label>Дата:
+        <input type="date" id="date" />
+      </label>
+      <label>Номер бланка:
+        <input type="text" id="docNumber" placeholder="1/2" />
+      </label>
+      <label>В/ч:
+        <input list="units" id="unit" />
+        <datalist id="units">
+          <option value="12345"></option>
+          <option value="67890"></option>
+        </datalist>
+      </label>
+      <fieldset>
+        <legend>Дежурный синоптик</legend>
+        <label>Звание:
+          <input list="ranks" id="metRank" />
+        </label>
+        <label>Фамилия:
+          <input list="metNames" id="metName" />
+          <datalist id="metNames">
+            <option value="Иванов"></option>
+            <option value="Петров"></option>
+            <option value="Сидоров"></option>
+          </datalist>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Командир экипажа</legend>
+        <label>Звание:
+          <input list="ranks" id="cmdRank" />
+        </label>
+        <label>Фамилия:
+          <input list="cmdNames" id="cmdName" />
+          <datalist id="cmdNames">
+            <option value="Смирнов"></option>
+            <option value="Кузнецов"></option>
+            <option value="Попов"></option>
+          </datalist>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Руководитель полётов</legend>
+        <label>Звание:
+          <input list="ranks" id="atcRank" />
+        </label>
+        <label>Фамилия:
+          <input list="atcNames" id="atcName" />
+          <datalist id="atcNames">
+            <option value="Васильев"></option>
+            <option value="Михайлов"></option>
+            <option value="Новиков"></option>
+          </datalist>
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Маршрут</legend>
+        <label>Аэродром взлёта:
+          <input type="text" id="depCity" />
+        </label>
+        <div id="depInfo"></div>
+        <label>Аэродром посадки:
+          <input type="text" id="arrCity" />
+        </label>
+        <div id="arrInfo"></div>
+        <label>Запасной аэродром 1:
+          <input type="text" id="altCity1" />
+        </label>
+        <div id="altInfo1"></div>
+        <label>Запасной аэродром 2:
+          <input type="text" id="altCity2" />
+        </label>
+        <div id="altInfo2"></div>
+      </fieldset>
+      <button type="button" id="generate">Сформировать</button>
+    </form>
+  </div>
+  <div id="output" style="display:none;">
+    <h2>Бланк прогноза</h2>
+    <pre id="template"></pre>
+    <button onclick="window.print()">Печать</button>
+  </div>
+  <datalist id="ranks">
+    <option value="лейтенант"></option>
+    <option value="ст. лейтенант"></option>
+    <option value="капитан"></option>
+    <option value="майор"></option>
+  </datalist>
+  <script src="script.js"></script>
 </body>
 </html>
